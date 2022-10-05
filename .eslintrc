@@ -1,0 +1,11 @@
+{
+  "plugins": ["react", "react-native"],
+  "extends": ["eslint:recommended", "react-app", "plugin:react-native/all"],
+  "env": {
+    "react-native/react-native": true
+  },
+  "rules": {
+    "react-native/sort-styles": 0,
+    "react/style-prop-object": 0
+  }
+}
