@@ -4,30 +4,31 @@ import { TodoItem } from "./todoItem";
 
 function TodoList({ todoList, onCompleted, onEdit, onDelete }) {
   return (
-    <View style={styles.todoListContainer}>
-      <FlatList
-        data={todoList}
-        keyExtractor={({ id }) => id}
-        ListEmptyComponent={(props) => {
-          return <Text style={styles.todoText}>No items added yet</Text>;
-        }}
-        renderItem={({ item }) => (
-          <TodoItem
-            item={item}
-            onCompleted={onCompleted}
-            onDelete={onDelete}
-            onEdit={onEdit}
-          />
-        )}
-      />
-    </View>
+    <FlatList
+      data={todoList}
+      scrollEnabled
+      style={styles.todoListContainer}
+      keyExtractor={({ id }) => id}
+      ListEmptyComponent={() => {
+        return <Text style={styles.todoText}>No items added yet</Text>;
+      }}
+      renderItem={({ item }) => (
+        <TodoItem
+          item={item}
+          onCompleted={onCompleted}
+          onDelete={onDelete}
+          onEdit={onEdit}
+        />
+      )}
+    />
   );
 }
 
 const styles = StyleSheet.create({
   todoListContainer: {
-    width: "80%",
+    width: "100%",
     margin: 32,
+    paddingHorizontal: "10%",
   },
   todoText: {
     color: TEXT_COLOR,

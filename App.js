@@ -1,8 +1,9 @@
-import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, StatusBar as RNStatusBar, Text } from "react-native";
+import { StatusBar } from "expo-status-bar";
 import TodoInput from "./components/todoInput";
 import TodoList from "./components/todoList";
+import { TEXT_COLOR } from "./constants/colors";
 
 export default function App() {
   const [todoList, updateTodoList] = useState([]);
@@ -38,6 +39,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.appHeader}>To-Do Tracker</Text>
       <TodoInput onAddItem={onAddItem} />
       <TodoList
         todoList={todoList}
@@ -53,7 +55,14 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: RNStatusBar.currentHeight + 32,
     alignItems: "center",
-    justifyContent: "center",
+    // justifyContent: "center",
+  },
+  appHeader: {
+    textAlign: "left",
+    fontSize: 24,
+    color: TEXT_COLOR,
+    marginBottom: 32,
   },
 });
