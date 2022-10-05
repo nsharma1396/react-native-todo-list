@@ -1,11 +1,24 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { useState } from "react";
+import { StyleSheet, View } from "react-native";
+import TodoInput from "./components/todoInput";
 
 export default function App() {
+  const [todoList, updateTodoList] = useState([]);
+  const onAddItem = (newItem) => {
+    updateTodoList([
+      ...todoList,
+      {
+        id: Date.now(),
+        value: newItem,
+        isCompleted: false,
+      },
+    ]);
+  };
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" networkActivityIndicatorVisible />
+      <TodoInput onAddItem={onAddItem} />
+      <StatusBar style="light" networkActivityIndicatorVisible />
     </View>
   );
 }
@@ -13,7 +26,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "lightgray",
     alignItems: "center",
     justifyContent: "center",
   },
