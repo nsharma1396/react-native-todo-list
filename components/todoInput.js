@@ -1,19 +1,13 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { TextInput, View, StyleSheet, Pressable, Text } from "react-native";
 import {
-  TextInput,
-  Button,
-  View,
-  StyleSheet,
-  Pressable,
-  Text,
-} from "react-native";
-import {
-  BUTTON_BACKGROUND,
+  APP_SECONDARY,
   TEXT_COLOR,
-  TEXT_INPUT_BORDER,
+  BORDER_COLOR_PRIMARY,
 } from "../constants/colors";
 
 function TodoInput({ onAddItem }) {
+  const textInput = useRef();
   const [todoItem, updateTodoItem] = useState("");
   const handleInputChange = (text) => {
     updateTodoItem(text);
@@ -27,9 +21,11 @@ function TodoInput({ onAddItem }) {
   return (
     <View style={styles.todoInputContainer}>
       <TextInput
+        ref={textInput}
         value={todoItem}
         selectTextOnFocus
         style={styles.textInput}
+        onSubmitEditing={handleAddItem}
         onChangeText={handleInputChange}
         placeholder="Add a to do item"
         placeholderTextColor={TEXT_COLOR}
@@ -59,10 +55,11 @@ const styles = StyleSheet.create({
     marginRight: 16,
     paddingHorizontal: 8,
     borderRadius: 4,
-    borderColor: TEXT_INPUT_BORDER,
+    borderColor: BORDER_COLOR_PRIMARY,
+    color: TEXT_COLOR,
   },
   button: {
-    backgroundColor: BUTTON_BACKGROUND,
+    backgroundColor: APP_SECONDARY,
     padding: 8,
   },
   buttonText: {
